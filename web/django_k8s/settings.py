@@ -62,44 +62,68 @@ DATABASES = {
     }
 }
 
+DB_USERNAME = config("DB_USERNAME")
+DB_PASSWORD = config("DB_PASSWORD")
+DB_DATABASE = config("DB_DATABASE")
+DB_HOST = config("DB_HOST")
+DB_PORT = config("DB_PORT")
+DB_IS_AVAIL = all([
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_DATABASE,
+    DB_HOST,
+    DB_PORT,
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+])
+DB_READY = config("DB_READY", default=False, cast=bool)
+
+if DB_IS_AVAIL and DB_READY:
+    DATABASES = {
+        'default': {
+            'ENGINE': config("DB_ENGINE"),
+            'NAME': config("DB_DATABASE"),
+            'USER': config("DB_USERNAME"),
+            'PASSWORD': config("DB_PASSWORD"),
+            'HOST': config("DB_HOST"),
+            'PORT': config("DB_PORT")
+        }
+    }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.0/topics/i18n/
+LANGUAGE_CODE = 'pt-BR'
 
-LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'America/Manaus'
 
-TIME_ZONE = 'UTC'
+DATE_FORMAT = "d/m/Y"
+
+DATETIME_FORMAT = "d/m/Y H:i"
+
+DATETIME_INPUT_FORMATS = "d/m/Y H:i"
+
+TIME_FORMAT = "G:i:s"
 
 USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+USE_THOUSAND_SEPARATOR = True
 
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
