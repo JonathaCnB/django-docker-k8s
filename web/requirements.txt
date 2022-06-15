@@ -1,0 +1,7 @@
+django
+gunicorn
+requests
+python-decouple
+psycopg2-binary
+django-storages
+boto3
