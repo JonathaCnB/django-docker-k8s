@@ -33,6 +33,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_k8s.urls'
 
+CSRF_TRUSTED_ORIGINS = ['https://*.jonathacarlos.dev.br']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,6 +78,7 @@ DB_IS_AVAIL = all([
 
 ])
 DB_READY = config("DB_READY", default=False, cast=bool)
+DB_IGNORE_SSL = config("DB_IGNORE_SSL", default=False, cast=bool)
 
 if DB_IS_AVAIL and DB_READY:
     DATABASES = {
@@ -88,6 +91,10 @@ if DB_IS_AVAIL and DB_READY:
             'PORT': DB_PORT
         }
     }
+    if not DB_IGNORE_SSL:
+        DATABASES['default']['OPTIONS'] = {
+            "sslmode": 'require'
+        }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -125,5 +132,7 @@ USE_TZ = True
 USE_THOUSAND_SEPARATOR = True
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

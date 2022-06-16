@@ -109,6 +109,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.prod
 .venv
 env/
 venv/
@@ -151,3 +152,4 @@ static/
 step.md
 
 other/
+deployment-guide.md
