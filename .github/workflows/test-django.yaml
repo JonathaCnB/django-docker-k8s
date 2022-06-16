@@ -11,7 +11,7 @@ jobs:
       run:
         working-directory: ./web
     env:
-      DJANGO_SECRET_KEY: test-key-not-good-maybe-make-one-better
+      SECRET_KEY: test-key-not-good-maybe-make-one-better
       POSTGRES_DB: dockerdc
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_USER: myuser
