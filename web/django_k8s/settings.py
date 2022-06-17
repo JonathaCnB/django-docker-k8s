@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     'storages',
+    # local apps
+    "pages.apps.PagesConfig",
 ]
 
 MIDDLEWARE = [
@@ -39,7 +41,9 @@ CSRF_TRUSTED_ORIGINS = ['https://*.jonathacarlos.dev.br']
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
