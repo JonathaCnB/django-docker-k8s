@@ -4,7 +4,6 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", default=False, cast=bool)
@@ -16,14 +15,16 @@ ALLOWED_HOSTS = []
 if ENV_ALLOWED_HOST:
     ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
 
-
 INSTALLED_APPS = [
+    # apps django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd party
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -58,10 +59,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_k8s.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,6 +80,7 @@ DB_IS_AVAIL = all([
 
 ])
 DB_READY = config("DB_READY", default=False, cast=bool)
+
 DB_IGNORE_SSL = config("DB_IGNORE_SSL", default=False, cast=bool)
 
 if DB_IS_AVAIL and DB_READY:
@@ -101,7 +99,6 @@ if DB_IS_AVAIL and DB_READY:
             "sslmode": 'require'
         }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
@@ -116,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
-
 
 LANGUAGE_CODE = 'pt-BR'
 
@@ -138,6 +134,12 @@ USE_THOUSAND_SEPARATOR = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles-cdn'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles"
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from .cdn.conf import *  # noqa
