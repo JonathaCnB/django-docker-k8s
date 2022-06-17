@@ -13,6 +13,10 @@
         },
         "terminal.integrated.env.linux": {
             "KUBECONFIG": "${workspaceFolder}/.kube/kubeconfig.yaml"
+        },
+        "yaml.schemas": {
+            "file:///c%3A/Users/jar/.vscode/extensions/atlassian.atlascode-2.10.9/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+            "https://json.schemastore.org/github-workflow.json": "file:///e%3A/portifolio/k8s/.github/workflows/build.yaml"
         }
     }
 }
