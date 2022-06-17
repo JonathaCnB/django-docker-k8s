@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="GrowPier - Seu desafio, nossa solução">
+        <meta name="author" content="Jonatha Carlos">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Jonatha Carlos</title>
+
+        <link href="{% static 'assets/css/fontawesome-all.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+        <link href="{% static 'assets/img/ico.png' %}" rel='icon'>
+    </head>
+    <body class="is-preload">
+
+        {% block content %}
+        {% endblock content %}
+
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+        <script src="{% static 'assets/js/browser.min.js' %}"></script>
+        <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+        <script src="{% static 'assets/js/util.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+</html>

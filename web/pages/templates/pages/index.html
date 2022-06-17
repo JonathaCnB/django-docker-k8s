@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'pages/components/nav.html' %}
+    <article id="top" class="wrapper style1">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-5-large col-12-medium">
+                    <span class="image fit"><img src="{% static 'assets/img/profile-pic.png' %}" alt="" /></span>
+                </div>
+                <div class="col-8 col-7-large col-12-medium">
+                    <header>
+                        <h1><strong>Jonatha Carlos</strong>.</h1>
+                    </header>
+                    <p>
+                        Desenvolvedor <strong>Full Stack</strong>,
+                        aprendendo com os desafios e transformando
+                        possibilidades em soluções.
+                    </p>
+                    <a
+                        href="https://drive.google.com/file/d/12Izskxmna6mT9OV4ROeIgdQKXW2YEVTT/view?usp=sharing"
+                        class="button large scrolly"
+                        target="_blank"
+                    >
+                        Currículo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+    {% include 'pages/components/footer.html' %}
+{% endblock content %}
