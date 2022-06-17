@@ -8,12 +8,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ENV_ALLOWED_HOST = config("ALLOWED_HOSTS").split(" ")
-
-ALLOWED_HOSTS = []
-
-if ENV_ALLOWED_HOST:
-    ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(" ")
 
 INSTALLED_APPS = [
     # apps django
