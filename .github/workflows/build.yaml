@@ -29,12 +29,12 @@ jobs:
         working-directory: ./web
         run: |
           docker build -f Dockerfile \
-            -t registry.digitalocean.com/jonathacnb/django-k8s-web:latest \
-            -t registry.digitalocean.com/jonathacnb/django-k8s-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
+            -t registry.digitalocean.com/jonathacnb/django-k8s:latest \
+            -t registry.digitalocean.com/jonathacnb/django-k8s:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
             .
       - name: Push image
         run: |
-          docker push registry.digitalocean.com/jonathacnb/django-k8s-web --all-tags
+          docker push registry.digitalocean.com/jonathacnb/django-k8s --all-tags
       - name: K8s cluster kubeconfig file with/ short-lived creds
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.CLUSTER_NAME }}
@@ -44,16 +44,17 @@ jobs:
           AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+          DEBUG=${{ secrets.DEBUG }}
           DJANGO_SUPERUSER_USERNAME=${{ secrets.DJANGO_SUPERUSER_USERNAME }}
           DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }}
           DJANGO_SUERPUSER_EMAIL=${{ secrets.DJANGO_SUERPUSER_EMAIL }}
           SECRET_KEY=${{ secrets.SECRET_KEY }}
           ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
-          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           DB_READY=${{ secrets.DB_READY }}
           DB_ENGINE=${{ secrets.DB_ENGINE }}
-          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}
           POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
           EOF
