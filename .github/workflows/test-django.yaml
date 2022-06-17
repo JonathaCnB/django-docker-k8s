@@ -12,7 +12,7 @@ jobs:
         working-directory: ./web
     env:
       SECRET_KEY: test-key-not-good-maybe-make-one-better
-      ALLOWED_HOSTS: localhost *
+      ALLOWED_HOSTS: localhost
       DB_READY: True
       POSTGRES_DB: dockerdc
       POSTGRES_PASSWORD: mysecretpassword
